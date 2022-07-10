@@ -24,7 +24,7 @@ public class ServiceDemoImpl implements ServiceDemo {
     public Result insertTest1(Test1 test1) {
         int i = mapperDemo.insertTest1(test1);
         Integer newId = test1.getId();
-        log.info("id = {}", newId);
+        log.debug("id = {}", newId);
         Result<Integer> result = ResultVo.success(newId, false);
         return result;
     }
@@ -44,7 +44,7 @@ public class ServiceDemoImpl implements ServiceDemo {
     @Override
     public Result selectTest1(Integer id) {
         List<Test1> test1List = mapperDemo.selectTest1(id);
-        log.info("query by id={}, result is {}", id, test1List);
+        log.debug("query by id={}, result is {}", id, test1List);
         Result<List<Test1>> result = ResultVo.success(test1List, false);
         return result;
     }
