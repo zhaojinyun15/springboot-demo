@@ -9,5 +9,9 @@ import java.util.List;
 public interface MapperDemo {
     int insertTest1(Test1 test1);
 
+    int deleteTest1(Integer id);
+
+    int updateTest1(Test1 test1);
+
     List<Test1> selectTest1(Integer id);
 }

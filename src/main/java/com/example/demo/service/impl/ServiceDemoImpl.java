@@ -31,14 +31,20 @@ public class ServiceDemoImpl implements ServiceDemo {
 
     @Override
     @Transactional
-    public Result deleteTest1() {
-        return null;
+    public Result deleteTest1(Integer id) {
+        int i = mapperDemo.deleteTest1(id);
+        log.debug("delete row number: {}", i);
+        Result<Object> result = ResultVo.success(null, false);
+        return result;
     }
 
     @Override
     @Transactional
-    public Result updateTest1() {
-        return null;
+    public Result updateTest1(Test1 test1) {
+        int i = mapperDemo.updateTest1(test1);
+        log.debug("update row number: {}", i);
+        Result<Object> result = ResultVo.success(null, false);
+        return result;
     }
 
     @Override

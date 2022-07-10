@@ -5,6 +5,14 @@
         INSERT INTO test1(a, b, c) VALUES (#{a}, #{b}, #{c})
     </insert>
 
+    <delete id="deleteTest1" parameterType="java.lang.Integer">
+        DELETE FROM test1 where id = #{id}
+    </delete>
+
+    <update id="updateTest1" parameterType="com.example.demo.model.Test1">
+        UPDATE test1 SET a = #{a}, b = #{b}, c = #{c} WHERE id = #{id}
+    </update>
+
     <select id="selectTest1" parameterType="java.lang.Integer" resultType="com.example.demo.model.Test1">
         SELECT * FROM test1
         <choose>
