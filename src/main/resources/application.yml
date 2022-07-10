@@ -1,0 +1,22 @@
+# port
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test
+    username: dev
+    password: 12345678
+
+mybatis:
+  mapper-locations: classpath:mybatis/*.xml
+
+logging:
+#  path: xxx
+  level:
+    com:
+      example:
+        demo:
+          mapper:
+            MapperDemo: DEBUG
