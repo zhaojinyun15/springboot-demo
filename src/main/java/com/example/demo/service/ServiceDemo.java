@@ -9,5 +9,5 @@ public interface ServiceDemo {
     Result insertTest1(Test1 test1);
     Result deleteTest1();
     Result updateTest1();
-    Result selectTest1();
+    Result selectTest1(Integer id);
 }

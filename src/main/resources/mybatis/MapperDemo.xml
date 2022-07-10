@@ -5,4 +5,12 @@
         INSERT INTO test1(a, b, c) VALUES (#{a}, #{b}, #{c})
     </insert>
 
+    <select id="selectTest1" parameterType="java.lang.Integer" resultType="com.example.demo.model.Test1">
+        SELECT * FROM test1
+        <choose>
+            <when test="id != null">
+                WHERE id = #{id}
+            </when>
+        </choose>
+    </select>
 </mapper>

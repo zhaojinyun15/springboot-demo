@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class ServiceDemoImpl implements ServiceDemo {
@@ -40,7 +42,10 @@ public class ServiceDemoImpl implements ServiceDemo {
     }
 
     @Override
-    public Result selectTest1() {
-        return null;
+    public Result selectTest1(Integer id) {
+        List<Test1> test1List = mapperDemo.selectTest1(id);
+        log.info("query by id={}, result is {}", id, test1List);
+        Result<List<Test1>> result = ResultVo.success(test1List, false);
+        return result;
     }
 }
