@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.model.MyCron;
 import com.example.demo.service.CronService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -26,7 +27,7 @@ import java.util.concurrent.ScheduledFuture;
 @EnableScheduling
 @Lazy
 @Configuration
-public class CronServiceImpl implements CronService {
+public class CronServiceImpl implements CronService, DisposableBean {
     private TaskScheduler taskScheduler;
 
     private static final Map<Integer, ScheduledFuture> FUTURE_MAP = new ConcurrentHashMap<>();
@@ -88,7 +89,18 @@ public class CronServiceImpl implements CronService {
 
     @Override
     public void start() {
+        log.info("start...");
         configureTasks(new ScheduledTaskRegistrar());
+    }
+
+    @Override
+    public void stop() {
+        log.info("stop...");
+        try {
+            cancelAllFutures(false);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -100,6 +112,22 @@ public class CronServiceImpl implements CronService {
             oldFuture.cancel(true);
             ScheduledFuture<?> newSchedule = taskScheduler.schedule(getRunnable(id, cron), getTriggerFromCron(cron));
             FUTURE_MAP.put(id, newSchedule);
+        }
+    }
+
+    @Override
+    public void destroy() {
+        cancelAllFutures(true);
+        FUTURE_MAP.clear();
+        cronMap.clear();
+        ((ThreadPoolTaskScheduler) taskScheduler).destroy();
+    }
+
+    private void cancelAllFutures(boolean mayInterruptIfRunning) {
+        for (ScheduledFuture future : FUTURE_MAP.values()) {
+            if (future != null) {
+                future.cancel(mayInterruptIfRunning);
+            }
         }
     }
 }

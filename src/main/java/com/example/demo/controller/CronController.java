@@ -22,6 +22,18 @@ public class CronController {
         return "success";
     }
 
+    @RequestMapping("/stop")   // http://localhost:8080/cron/stop
+    public String stopCron() {
+        cronService.stop();
+        return "success";
+    }
+
+    @RequestMapping("/destroy")   // http://localhost:8080/cron/destroy
+    public String destroyCron() {
+        cronService.destroy();
+        return "success";
+    }
+
     @PostMapping("/update")   // http://localhost:8080/cron/update
     public String updateCron(@RequestBody MyCron myCron) {
         log.info("update cron: {}", myCron);

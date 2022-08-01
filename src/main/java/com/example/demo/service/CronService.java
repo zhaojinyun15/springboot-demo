@@ -7,5 +7,9 @@ import org.springframework.stereotype.Service;
 public interface CronService {
     void start();
 
+    void stop();
+
+    void destroy();
+
     void update(MyCron myCron);
 }
