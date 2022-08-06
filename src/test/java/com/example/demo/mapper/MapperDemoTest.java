@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 @SpringBootTest(classes = DemoApplication.class)
 @Slf4j
 public class MapperDemoTest {
@@ -21,5 +23,14 @@ public class MapperDemoTest {
 //        test1.setC("zxc");
         log.debug("test1: {}", test1);
         int i = mapper.insertTest1(test1);
+    }
+
+    @Test
+    void selectTest1Test() {
+        Integer id = 1;
+        List<Test1> test1List = mapper.selectTest1(id);
+        for (Test1 test1 : test1List) {
+            log.debug("test1: {}", test1);
+        }
     }
 }
