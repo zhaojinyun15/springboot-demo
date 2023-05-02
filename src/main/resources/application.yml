@@ -25,5 +25,7 @@ logging:
       example:
         demo: DEBUG
 
+log-path: log
+
 property-one: p1
 property-two: p2

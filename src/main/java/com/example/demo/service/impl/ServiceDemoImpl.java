@@ -6,6 +6,7 @@ import com.example.demo.service.ServiceDemo;
 import com.example.demo.util.Result;
 import com.example.demo.util.ResultVo;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,5 +54,14 @@ public class ServiceDemoImpl implements ServiceDemo {
         log.debug("query by id={}, result is {}", id, test1List);
         Result<List<Test1>> result = ResultVo.success(test1List, false);
         return result;
+    }
+
+    @Override
+    public Result logThreadTest1(String threadName) {
+        log.info("main thread");
+        MDC.put("threadName", threadName);
+        log.info("sub thread, threadName is: {}", threadName);
+        MDC.remove("threadName");
+        return ResultVo.success(threadName, true);
     }
 }

@@ -10,4 +10,6 @@ public interface ServiceDemo {
     Result deleteTest1(Integer id);
     Result updateTest1(Test1 test1);
     Result selectTest1(Integer id);
+
+    Result logThreadTest1(String threadName);
 }

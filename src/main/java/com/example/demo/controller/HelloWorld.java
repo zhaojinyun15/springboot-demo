@@ -49,4 +49,10 @@ public class HelloWorld {
         log.debug("selectTest1's params: {}", id);
         return serviceDemo.selectTest1(id);
     }
+
+    @GetMapping("/thread")   // http://localhost:8080/hello/thread?threadName=xxx
+    public String logThreadTest1(String threadName) {
+        log.debug("logThreadTest1's params: {}", threadName);
+        return serviceDemo.logThreadTest1(threadName).getData().toString();
+    }
 }
