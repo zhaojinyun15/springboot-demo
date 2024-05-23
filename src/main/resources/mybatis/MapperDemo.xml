@@ -21,4 +21,33 @@
             </when>
         </choose>
     </select>
+
+    <resultMap id="pResultMap" type="com.example.demo.model.TestP">
+        <association property="t1">
+            <result property="id" column="id"/>
+            <result property="a" column="a"/>
+            <result property="b" column="b"/>
+            <result property="c" column="c"/>
+        </association>
+        <association property="t2">
+            <result property="id" column="t2_id"/>
+            <result property="m" column="m"/>
+        </association>
+    </resultMap>
+
+    <select id="selectTestP" parameterType="java.lang.Integer" resultMap="pResultMap">
+        SELECT
+            id,
+            a,
+            b,
+            c,
+            id as t2_id,
+            concat(a, b, c) as m
+        FROM test1
+        <choose>
+            <when test="id != null">
+                WHERE id = #{id}
+            </when>
+        </choose>
+    </select>
 </mapper>
