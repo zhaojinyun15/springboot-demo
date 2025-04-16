@@ -29,3 +29,7 @@ log-path: log
 
 property-one: p1
 property-two: p2
+
+data:
+  d1: aaa
+  d2: bbb
